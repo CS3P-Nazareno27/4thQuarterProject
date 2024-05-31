@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Med Signup Page</title>
+    <style>
+        body {   
+            font-family: 'Roboto', sans-serif;
+            background: url("1.png") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: hidden;
+        }
+        #sign {
+            background-image: url('1.png');
+            padding: 8vh;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            width: 55vh;
+            height: 70vh;
+            text-align: center;
+            position: relative;
+            margin: 10vh;
+        }
+        .formInput {
+            width: 50vh;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .formButton {
+            width: 50vh;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: none;
+            background-color: #0066ff;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .formButton:hover {
+            background-color: #0051cc;
+            transform: translateY(-2px);
+        }
+        .formButton.secondary {
+            background-color: #444;
+        }
+        .formButton.secondary:hover {
+            background-color: #333;
+        }
+        .astronaut {
+            position: absolute;
+            right: -120px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 180px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .astronaut:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+        h1 {
+            margin-top: -5vh;
+        }
+        legend {
+            text-align: left;
+        }
+        fieldset {
+            border-radius: 4vh;
+        }
+        #logo {
+            width: 5vh;
+            position: fixed;
+            top: 12vh;
+            left: 117vh;
+        }
+        #backToSignUp {
+            display: none;
+            color: #0066ff;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        #backToSignUp:hover {
+            color: #0051cc;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="sign">
+        <img id="logo" src="logo.png">
+        <h1>Space Med</h1>
+        <form id="formPart" onsubmit="return signUp(event)">
+            <fieldset>
+                <legend id="formLegend">Create an account</legend>
+                <input type="text" class="formInput" name="name" placeholder="Name" required>
+                <input type="email" class="formInput" name="email" placeholder="Email" required>
+                <input type="password" class="formInput" name="password" placeholder="Password" required>
+                <input type="password" class="formInput" name="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit" class="formButton">Sign Up</button>
+                <button type="button" class="formButton secondary" onclick="switchToSignIn()">Already have an account? Log in</button>
+                
+            </fieldset>
+        </form>
+    </div>
+    <script>
+        function signUp(event) {
+            event.preventDefault();
+            
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return;
+            }
+
+            // Store the data in local storage
+            localStorage.setItem("name", name);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+
+            localStorage.setItem("signedIn", "true");
+
+            // Redirect to home.html/the home page
+            window.location.href = 'home.html';
+        }
+
+        function switchToSignIn() {
+            window,location.href = 'indextwo.html'
+        }
+
+    </script>
+</body>
+</html>

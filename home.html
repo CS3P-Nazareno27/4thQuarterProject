@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Med</title>
+    <link rel="stylesheet" href="https://www.onlinewebfonts.com/icon">
+
+    <style>
+        @font-face {
+            font-family: "Terano Bold";
+            src: url("a831ff88ea5dc02c04708fa7ed05c158.eot");
+            src: url("a831ff88ea5dc02c04708fa7ed05c158.eot?#iefix") format("embedded-opentype"),
+                 url("a831ff88ea5dc02c04708fa7ed05c158.woff") format("woff"),
+                 url("a831ff88ea5dc02c04708fa7ed05c158.woff2") format("woff2"),
+                 url("a831ff88ea5dc02c04708fa7ed05c158.ttf") format("truetype"),
+                 url("a831ff88ea5dc02c04708fa7ed05c158.svg#Terano Bold") format("svg");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }       
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Terano Bold';
+            background: url("1.png") no-repeat center center;
+            background-size: cover;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.316);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 5vh;
+            margin: 1vh 1vh 0 1vh;
+            width: calc(100% - 2vh);
+            max-width: 1470px;
+            z-index: 10;
+            position: relative;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 4vh;
+            margin-right: 10px;
+        }
+
+        .logo p {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 4vh;
+            margin: 0;
+            padding: 0;
+            font-size: 2.5vh;
+           
+        }
+
+        header nav ul li a {
+            position: relative;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: #c97eefaf;
+            transition: width 0.5s;
+        }
+
+        header nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        #signupDiv {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        #signupDiv .signUp {
+            text-decoration: none;
+            color: black;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: transform 0.5s;
+        }
+
+        #signupDiv .signUp:hover {
+            transform: scale(1.1);
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 5vh 20px;
+            flex-direction: column;
+            min-height: calc(100vh - 80px);
+            margin-top: -10vh; 
+        }
+
+        .content {
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin: 0.5em 0;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin: 0.5em 0;
+        }
+
+        /* Adds animation to the images */
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(0, -10px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .astronaut {
+            position: absolute;
+            left: 5%;
+            bottom: 20%;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        .astronaut img {
+            width: 350px;
+        }
+
+        .satellite {
+            position: absolute;
+            right: 5%;
+            top: 20%;
+            animation: float 4s infinite ease-in-out reverse;
+        }
+
+        .satellite img {
+            width: 250px;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            text-align: center;
+            margin: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .section-label {
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            margin: 2em 0;
+            margin-top: -10vh;
+        }
+
+        section {
+            height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 50px 0; 
+        }
+
+        .onePic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; 
+        }
+
+        .imageContain {
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            margin: 0 10px; 
+        }
+
+        .imageContain img {
+            width: 50vh;
+            transition: filter 0.7s ease, transform 0.8s ease;
+        }
+
+        .imageContain:hover img {
+            filter: blur(3px); 
+            transform: scale(1.1);
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2.6vh;
+            opacity: 0; 
+            transition: opacity 0.3s ease; 
+        }
+
+        .imageContain:hover .text-overlay {
+            opacity: 1; 
+        }
+        .label-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .imageContain:hover .label-overlay {
+            opacity: 1;
+        }
+        .tabsAll{
+            height: 85vh; 
+            
+            margin-bottom: 20px; 
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tabs button{
+            background-color: #5566B8;
+            border-radius: 2vh;
+            margin-right: 2vh;
+            width: 30vh;
+        }
+
+        .tablink {  
+            background-color: #f2f2f2;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+
+        .tablink:hover {
+            background-color: #ddd;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ccc;
+        }
+
+        .tabcontent h3 {
+            margin-top: 0;
+        }
+        .tabcontent img{
+            position: relative;
+            margin-top: 0;
+            border-radius: 2vh;
+        }
+        .photos{
+            display: block;
+            width: 10vh;
+        }
+        .photos {
+            display: inline-block;
+            margin: 10px; 
+            text-align: center; 
+            margin-right: 30vh;
+            transition: transform 0.3s;
+        }
+        .photos:hover {
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="Space Med Logo">
+                <p>Space Med</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#one">About</a></li>
+                    <li><a href="#two">Explore</a></li>
+                    <li><a href="#three">Contacts</a></li>
+                </ul>
+            </nav>
+            <div id="signupDiv">
+                <a href="index.html" onclick="signOut()" class="signUp">Sign out</a>
+            </div>
+        </header>
+        
+        <main>
+            <div class="content">
+                <h1>SPACE MEDICINE</h1>
+                <h2>Expanding Horizons of Healthcare</h2>
+            </div>
+            <div class="astronaut">
+                <img id="astronaut" src="float.png" alt="Astronaut">
+            </div>
+            <div class="satellite">
+                <img src="satellite.png" alt="Satellite">
+            </div>
+        </main>
+
+        <section id="one">
+            <div class="section-label">About Space Medicine</div>
+            <div class="onePic" onclick="toggleTextOverlay"(this)>
+                <div class="imageContain">
+                    <img src="medSci.png" class="medSci" alt="Medical Science">
+                    <div class="text-overlay">Aerospace medicine is a specialist field of medicine that studies medical issues that arise during human flight both inside and outside of the atmosphere (aviation medicine).</div>
+                    <div class="label-overlay">WHAT</div>
+                </div>
+                <div class="imageContain">
+                    <img src="medFath.png" class="medFath" alt="Medical Facilities">
+                    <div class="text-overlay">Most people agree that Paul Bert, a French physiologist from the 19th century, is the founder of contemporary aviation medicine. His groundbreaking discoveries of how balloonists were affected by high and low air pressure were widely employed starting in World War II and led to a large and active research program.</div>
+                    <div class="label-overlay">WHO</div>
+                </div>
+                <div class="imageContain">
+                    <img src="medSci.png" class="medSci" alt="Medical Science">
+                    <div class="text-overlay">Promoting human efficacy and safety in the face of aerospace flight's extremes—high temperatures, low air pressure, radiation, noise, vibrations, oxygen deprivation, and powerful acceleration and deceleration forces—is the ultimate goal of this specialty.
+                    </div>
+                    <div class="label-overlay">WHY</div>
+                </div>
+            </div>
+        </section>        
+
+        <section id="two">
+            <div class="section-label" style="margin-top: 2vh;">Know more about Space Medicine</div>   
+            <div class="tabsAll">
+            <div class="tabs">
+                <button class="tablink" onclick="openTab('tab1')">Telemedicine</button>
+                <button class="tablink" onclick="openTab('tab2')">Remote Surgery</button>
+                <button class="tablink" onclick="openTab('tab3')">Space Pharmacology</button>
+            </div>
+        
+            <div id="tab1" class="tabcontent">
+                <h3>Telemedicine</h3>
+                <p>Telemedicine enables astronauts to consult with healthcare professionals on Earth in real-time, facilitating diagnosis and treatment of medical issues during space missions.</p>
+                <img src="teleMed.webp" alt="Telemedicine Image" style="width: 74vh;">
+                <img src="teleMed2.JPEG" alt="Telemedicine Image" style="width: 88vh;">
+
+            </div>
+        
+            <div id="tab2" class="tabcontent">
+                <h3>Remote Surgery</h3>
+                <p>Remote surgery allows surgeons on Earth to perform surgical procedures on astronauts in space using robotic systems, ensuring timely medical interventions.</p>
+                <img src="surgerySpace.jpg" alt="Surgery Image">
+                <img src="surgerySpace2.jpg" alt="Surgery Image" style="width: 78vh;">
+            </div>
+        
+            <div id="tab3" class="tabcontent">
+                <h3>Space Pharmacology</h3>
+                <p>Space pharmacology involves the study of how medications interact with the human body in space, helping to develop drugs tailored for use in microgravity environments.</p>
+                <img src="spacePharm.webp" alt="Pharmacology Image" style="width: 70vh;">
+                <img src="spacePharm2.webp" alt="Pharmacology Image" style="width: 78vh;">
+            </div>
+            </div>
+        </section>
+        
+        <section id="three" >
+            <div class="section-label" style="margin-top: 2vh;">Contact Me and Know my Socials</div>   
+            <div class="contacts" style="margin-left: 10vh;">
+                <div class="photos">
+                    <a href="https://www.facebook.com/profile.php?id=100057907188637"> 
+                    <img src="facebook.svg" alt="" style="width:200px;">
+                   
+                    </a>
+                </div>
+                <div class="photos">
+                    <a href="https://open.spotify.com/user/g8ei4ar1hy8wawu2v4b0gk2ld?si=73adfad477b24ee0">
+                    <img src="spotify.svg" alt="" style="width:200px;">
+                    
+                    </a>
+                </div>
+
+                <div class="photos">
+                    <a href=" https://www.instagram.com/onerazanpatrick/">
+                    <img src="instagram.svg" alt="" style="width:200px;">
+                    
+                    </a>
+                </div>
+                <div class="photos">
+                    <a href="mailto:pnazareno@crc.pshs.edu.ph">
+                    <img src="envelope-solid.svg" alt="" style="width:200px;">
+                    
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>    
+        <p>&copy; 2024 Space Med. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function signOut() {
+            localStorage.removeItem("signedIn");
+        }
+
+        window.onload = function() {
+            const name = localStorage.getItem("name");
+            const signedIn = localStorage.getItem("signedIn");
+
+            if (name && signedIn === "true") {
+                const welcomeMessage = document.createElement("h3");
+                welcomeMessage.textContent = "Welcome to Space Med, " + name + "!";
+                welcomeMessage.classList.add("welcome-message");
+                document.getElementsByTagName("main")[0].insertBefore(welcomeMessage, document.getElementsByTagName("main")[0].firstChild);
+                welcomeMessage.animate([
+                    { opacity: 0, transform: 'translateY(-20px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ], {
+                    duration: 1000,
+                    easing: 'ease-in-out'
+                });
+                setTimeout(function() {
+                    welcomeMessage.style.opacity = 0;
+                    setTimeout(function() {
+                        welcomeMessage.remove();
+                    }, 1000);
+                }, 10000);
+                localStorage.removeItem("signedIn");
+            }
+        };
+        function openTab(tabName) {
+        // Get all elements with class "tabcontent"
+        const tabContents = document.getElementsByClassName('tabcontent');
+
+        // Hide all tab contents
+        for (let i = 0; i < tabContents.length; i++) {
+            tabContents[i].style.display = 'none';
+        }
+
+        // Show the selected tab content
+        document.getElementById(tabName).style.display = 'block';
+    }
+    
+
+    </script>
+</body>
+</html>
